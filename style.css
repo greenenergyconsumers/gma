@@ -1,0 +1,70 @@
+#map {
+  height: 100%;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  padding: 5vh;
+  text-align: center;
+}
+
+#legend {
+  font-family: Arial, sans-serif;
+  margin: 0 auto 20px;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 80%;
+  width: 80%;
+  border: 3px solid #fff;
+}
+#legend > div {
+  display: flex;
+  flex: 1;
+  font-size: 0.9rem;
+  background-color: #fff;
+}
+#legend > div.break {
+  flex-basis: 100%;
+}
+#legend > div > div {
+  padding: 2rem;
+  flex: 1 auto;
+}
+#legend > div:nth-child(-n+4) {
+  color: #fff;
+  font-size: 1rem;
+}
+#legend > div:nth-child(n+8) {
+  background-color: #fff;
+}
+#legend > div:nth-child(n+8) > div {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+#legend > div:nth-child(n+8) > div > div:first-child {
+  width: 50px;
+  height: 50px;
+}
+#legend > div:nth-child(n+8) > div > div:last-child {
+  padding-left: 10px;
+}
+#legend > div#label {
+  color: #000;
+  background-color: #fff;
+  padding: 10px;
+  flex: 1 1 100%;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+/*# sourceMappingURL=style.css.map */
