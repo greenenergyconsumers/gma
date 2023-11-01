@@ -6,96 +6,128 @@ async function initMap() {
   const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary(
     "marker",
   );
-    const map = new Map(document.getElementById("map"), {
-      center: { lat: 42.2625932, lng:-71.8022934 }, //Worcester MA
-      zoom: 9,
-      mapId: "155147bec9cead92",  //7ba16be0c9375fa7
+const map = new Map(document.getElementById("map"), {
+  center: { lat: 42.2625932, lng:-71.8022934 }, //Worcester MA
+  zoom: 9,
+  mapId: "155147bec9cead92",  //7ba16be0c9375fa7
+});
+
+const featureLayer = map.getFeatureLayer(
+  google.maps.FeatureType.LOCALITY //ADMINISTRATIVE_AREA_LEVEL_1
+);
+
+  featureLayer.style = (featureStyleFunctionOptions) => {
+    const placeFeature = featureStyleFunctionOptions.feature;
+    const locality = states[placeFeature.placeId];
+    const obj = new Object(locality);
+    console.log(placeFeature);
+    let fillColor;
+
+  
+
+  if (Object.keys(obj).length !== 0) { // Include only localtiies with info (MA)
+  
+    const position = { lat: obj.lat, lng: obj.lng };
+
+    function hasRenewable() {
+      let r = obj.Renewable !== '' ? ', Renewable: ' + obj.Renewable : '';
+      return 'Status: ' + obj.Status + r;
+    }
+    const contentString = hasRenewable(); 
+
+    const infoWin = new google.maps.InfoWindow({
+      content: contentString,
+    } );
+
+    const nameDiv = document.createElement("div");
+    nameDiv.className = 'marker';
+    nameDiv.textContent = obj.name;
+    
+    const marker = new AdvancedMarkerElement({
+      position: position,
+      map: map,
+      content:  nameDiv,
+      title: contentString,
     });
 
-    const featureLayer = map.getFeatureLayer(
-      google.maps.FeatureType.LOCALITY //ADMINISTRATIVE_AREA_LEVEL_1
-    );
-    
-      featureLayer.style = (featureStyleFunctionOptions) => {
-        const placeFeature = featureStyleFunctionOptions.feature;
-        const locality = states[placeFeature.placeId];
-        const obj = new Object(locality);
-        // console.log(obj.length);
-        let fillColor;
-        const infoWindow = new google.maps.InfoWindow({
-        content: "",
-        disableAutoPan: true,
-      });
-      if (Object.keys(obj).length !== 0) { // Include only localtiies with info (MA)
-      switch (obj.Status) {
-        case "No Class 1":
-          fillColor = "#837359";
-          break;
-        case "Default > 5%":
-          if (obj.Renewable > 30) {
-            fillColor = "#0e7c3a"
-          } else if (obj.Renewable > 20) {
-            fillColor = "#7abc96"; 
-          } else if (obj.Renewable > 10) {
-            fillColor = "#b3e0b8"; 
-          } else {
-            fillColor = "#095909"; 
-          }
-          break;
-        case "No Aggregation":
-          fillColor = "#837359"; 
-          break;
-        case "Opt Up Class I":
-          fillColor = "#d9c3a2";
-          break;
-        case "Approved by DPU":
-            fillColor = "#2c52a3";
-            break;
-        case "Waiting for DPU approval":
-          fillColor = "#7bb0e1";
-          break;
-        case "Researching (in transition)":
-          fillColor = "#c6ddf3";
-          break;
-        case "Plan expired or suspended":
-          fillColor = "#cecfd1";
-          break;
-        case "Municipal Light Plant":
-            fillColor = "#a7a8ac";
-            break;
-        // case false:
-        //   strokeWeight = .25;
-        //       break;
-        default:
-          fillColor = "white";
-          break;
-      }  return {
-        fillColor,
-        strokeColor: "#000000",
-        strokeWeight: .25,
-      };
-      };
-    };
 
-   
+    marker.addListener("mouseover", () => {
+      console.log('open');
+      // infoWin.open({
+      //   marker,
+      //   map,
+      // });
+    });
+  
 
-    const myRequest = new Request('./localities.json');
-    const states = {};
-    fetch(myRequest)
-    .then((response) => response.json())
-    .then((data) => {
-      for (const programs of data) {
-       //states[programs.pid] = programs.Status;
-       states[programs.pid] = {
-        'Status' : programs.Status, 
-        'Renewable' : programs.Renewable,
-        'lat' : programs.lat, 
-        'lng' : programs.lng
-      };
-     }
+  switch (obj.Status) {
+    case "No Class 1":
+      fillColor = "#837359";
+      break;
+    case "Default > 5%":
+      if (obj.Renewable > 30) {
+        fillColor = "#0e7c3a"
+      } else if (obj.Renewable > 20) {
+        fillColor = "#7abc96"; 
+      } else if (obj.Renewable > 10) {
+        fillColor = "#b3e0b8"; 
+      } else {
+        fillColor = "#095909"; 
+      }
+      break;
+    case "No Aggregation":
+      fillColor = "#837359"; 
+      break;
+    case "Opt Up Class I":
+      fillColor = "#d9c3a2";
+      break;
+    case "Approved by DPU":
+        fillColor = "#2c52a3";
+        break;
+    case "Waiting for DPU approval":
+      fillColor = "#7bb0e1";
+      break;
+    case "Researching (in transition)":
+      fillColor = "#c6ddf3";
+      break;
+    case "Plan expired or suspended":
+      fillColor = "#cecfd1";
+      break;
+    case "Municipal Light Plant":
+        fillColor = "#a7a8ac";
+        break;
+    default:
+      fillColor = "white";
+      break;
+  }  return {
+    fillColor,
+    strokeColor: "#000000",
+    strokeWeight: .25,
+  };
 
-    })
-    .catch(console.error);
+  };
+};
+
+
+
+const myRequest = new Request('./localities.json');
+const states = {};
+fetch(myRequest)
+.then((response) => response.json())
+.then((data) => {
+  for (const programs of data) {
+  //states[programs.pid] = programs.Status;
+  states[programs.pid] = {
+    'Status' : programs.Status, 
+    'Renewable' : programs.Renewable,
+    'lat' : programs.lat, 
+    'lng' : programs.lng,
+    'name' : programs.City,
+  };
+}
+
+})
+.catch(console.error);
 
 // console.log(states);
 
@@ -177,6 +209,11 @@ let i = 0;
     }
     legend.appendChild(div);
   }
+
+
+
+
+// console.log(infoWin);
 
   map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(legend);
 
