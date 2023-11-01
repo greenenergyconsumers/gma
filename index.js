@@ -13,21 +13,20 @@ async function initMap() {
     });
 
     const featureLayer = map.getFeatureLayer(
-      google.maps.FeatureType.LOCALITY
+      google.maps.FeatureType.LOCALITY //ADMINISTRATIVE_AREA_LEVEL_1
     );
-  
-    featureLayer.style = (featureStyleFunctionOptions) => {
-      const placeFeature = featureStyleFunctionOptions.feature;
-      const locality = states[placeFeature.placeId];
-      const obj = new Object(locality);
-      // console.log(pid.pid);
-      let fillColor;
-  
-       const infoWindow = new google.maps.InfoWindow({
-      content: "",
-      disableAutoPan: true,
-    });
-
+    
+      featureLayer.style = (featureStyleFunctionOptions) => {
+        const placeFeature = featureStyleFunctionOptions.feature;
+        const locality = states[placeFeature.placeId];
+        const obj = new Object(locality);
+        // console.log(obj.length);
+        let fillColor;
+        const infoWindow = new google.maps.InfoWindow({
+        content: "",
+        disableAutoPan: true,
+      });
+      if (Object.keys(obj).length !== 0) { // Include only localtiies with info (MA)
       switch (obj.Status) {
         case "No Class 1":
           fillColor = "#837359";
@@ -64,12 +63,17 @@ async function initMap() {
         case "Municipal Light Plant":
             fillColor = "#a7a8ac";
             break;
+        // case false:
+        //   strokeWeight = .25;
+        //       break;
         default:
           fillColor = "white";
           break;
       }  return {
         fillColor,
-        fillOpacity: 1,
+        strokeColor: "#000000",
+        strokeWeight: .25,
+      };
       };
     };
 
@@ -93,7 +97,7 @@ async function initMap() {
     })
     .catch(console.error);
 
-console.log(states);
+// console.log(states);
 
 const colors = { 
   r30: {
