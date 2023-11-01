@@ -33,7 +33,7 @@ const featureLayer = map.getFeatureLayer(
       let r = obj.Renewable !== '' ? ', Renewable: ' + obj.Renewable : '';
       return 'Status: ' + obj.Status + r;
     }
-    const contentString = hasRenewable(); 
+    const contentString = obj.name + ': ' + hasRenewable(); 
 
     const infoWin = new google.maps.InfoWindow({
       content: contentString,
