@@ -24,43 +24,49 @@ header {
   margin: 0 auto 20px;
   display: flex;
   flex-wrap: wrap;
-  max-width: 80%;
-  width: 80%;
+  max-width: 95%;
+  width: 95%;
   background-color: #fff;
-  padding: 10px;
+  padding: 2%;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1882352941);
 }
 #legend > div {
   display: flex;
-  flex: 1;
   font-size: 0.9rem;
+  flex: auto;
 }
 #legend > div.break {
   flex-basis: 100%;
 }
 #legend > div > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 1rem 0.5rem;
   flex: 1 auto;
   text-align: center;
   font-weight: bold;
 }
-#legend > div:nth-child(-n+2), #legend > div:nth-child(6) {
+#legend > div > div > div {
+  text-align: left;
+}
+#legend > div:nth-child(-n+2), #legend > div:nth-child(8) {
   color: #fff;
 }
-#legend > div:nth-child(n+8) {
+#legend > div:nth-child(n+9) {
   background-color: #fff;
 }
-#legend > div:nth-child(n+8) > div {
+#legend > div:nth-child(n+9) > div {
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
-#legend > div:nth-child(n+8) > div > div:first-child {
+#legend > div:nth-child(n+9) > div > div:first-child {
   width: 30px;
   height: 30px;
 }
-#legend > div:nth-child(n+8) > div > div:last-child {
+#legend > div:nth-child(n+9) > div > div:last-child {
   padding-left: 10px;
   flex: 2;
 }
@@ -76,6 +82,19 @@ header {
 }
 #legend > div#label span:first-child {
   color: #095909;
+}
+@media screen and (min-width: 480px) {
+  #legend > div {
+    flex: 1;
+    align-items: center;
+  }
+}
+@media screen and (min-width: 600px) {
+  #legend {
+    padding: 10px;
+    max-width: 80%;
+    width: 80%;
+  }
 }
 
 .name {

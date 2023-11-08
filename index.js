@@ -58,6 +58,10 @@ async function initMap() {
 
 
 const colors = { 
+    lebel: {
+      name: "Most green (Class I renewable content)</span><span>Less green",
+      color: "",
+    },
     r30: {
       name: "> 30%",
       color: "#095909",
@@ -74,7 +78,7 @@ const colors = {
       name: "5 - 9%",
       color: "#b3e0b8",
     },
-    r59: {
+    r14: {
       name: "1 - 4%",
       color: "#c9e7d9",
     },
@@ -89,6 +93,10 @@ const colors = {
     Other: {
       name: "No Aggregation",
       color: "#f2f9f4",
+    },
+    break: {
+      name: "",
+      color: "",
     },
     app_dpu: {
       name: "Approved by DPU",
@@ -111,34 +119,45 @@ const colors = {
       color: "#a7a8ac",
     },
   };
-  // Approved by DPU: #2c52a3, Waiting for DPU approval: #7bb0e1, Researching (in transition): #c6ddf3, 
-  // Plan expired or suspended: #cecfd1, Municipal Light PLant (No Class I requirements): #a7a8ac
+
+console.log(colors);
   
+  legend = buildLegend(colors);
+  
+//   const children = legend.childNodes;
+//  console.log(children[0]);
+  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(legend);
+ 
+} //async function initMap()
+
+
+
+
+function buildLegend(colors) {
+   // Approved by DPU: #2c52a3, Waiting for DPU approval: #7bb0e1, Researching (in transition): #c6ddf3, 
+  // Plan expired or suspended: #cecfd1, Municipal Light PLant (No Class I requirements): #a7a8ac
   const legend = document.getElementById("legend");
   
-  let i = 0;
-    for (const key in colors) {
-      i++;
-      const type = colors[key];
-      const name = type.name;
-      const color = type.color;
+  for (const [i, [key, value]]  of Object.entries(Object.entries(colors))) {
+
+      const name = value.name;
+      const color = value.color;
       const div = document.createElement("div");
-      if (i > 8) {
-        div.innerHTML = '<div><div style="background-color:' + color + '"></div><div>' + name;
-      } else if (i == 1 ) {
+      if (i > 9) {
+        div.innerHTML = '<div><div style="background-color:' + color +'"></div><div>' + name;
+      } else if (i == 0 ) {
         div.setAttribute("id", "label");
-        div.innerHTML = '<span>Most green (Class I renewable content)</span><span>Less green</span>';
-      } else if (i == 8) {
-        div.setAttribute("class", "break");;
+        div.innerHTML = '<span>'+ name +'</span>';
+      } else if (i == 9) {
+        div.setAttribute("class", "break");
       } else {
-        div.innerHTML = '<div style="background-color:' + color + '">' + name ;
+        div.innerHTML = '<div style="background-color:' + color +'">' + name;
       }
       legend.appendChild(div);
     }
-  
+  return legend;
   // console.log(infoWin);
-    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(legend);
-
+   
 }
 
 // Helper function for the infowindow.
@@ -273,7 +292,6 @@ function getJson() {
     fetch(myRequest)
     .then((response) => response.json())
     .then((data) => {
-
         for (const programs of data) {
             pids.push(programs.pid);
             states[programs.pid] = {

@@ -31,30 +31,36 @@
     margin: 0 auto 20px;
     display: flex;
     flex-wrap: wrap;
-    max-width: 80%;
-    width: 80%;
+    max-width: 95%;
+    width: 95%;
     background-color: #fff;
-    padding: 10px;
+    padding: 2%;
     box-shadow: 5px 5px 5px #00000030;
     > div {
         display: flex;
-        flex: 1;
         font-size: .9rem;
+        flex: auto;
        &.break {
         flex-basis: 100%;
        }
         > div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 1rem .5rem;
             flex: 1 auto;
             text-align: center;
             font-weight: bold;
+            > div {
+              text-align: left
+            }
         }
         &:nth-child(-n+2),
-        &:nth-child(6) {
+        &:nth-child(8) {
                 color: #fff;
                 // font-size: 1rem;
             }
-        &:nth-child(n+8) {
+        &:nth-child(n+9) {
             background-color: #fff;
                 > div {
                     padding: 10px;
@@ -89,6 +95,15 @@
                   }
                 }
             }
+            @media screen and (min-width: 480px) {
+              flex: 1;
+              align-items: center;
+            }
+     }
+     @media screen and (min-width: 600px) {
+          padding: 10px;
+          max-width: 80%;
+          width: 80%;
      }
     }
 .name {
