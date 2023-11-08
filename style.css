@@ -10,7 +10,7 @@ body {
 }
 
 header {
-  padding: 5vh;
+  padding: 1vh;
   text-align: center;
 }
 
@@ -42,6 +42,7 @@ header {
   padding: 1rem 0.5rem;
   flex: 1 auto;
   text-align: center;
+  font-weight: bold;
 }
 #legend > div:nth-child(-n+2), #legend > div:nth-child(6) {
   color: #fff;
@@ -75,6 +76,100 @@ header {
 }
 #legend > div#label span:first-child {
   color: #095909;
+}
+
+.name {
+  opacity: 0;
+  display: flex;
+  font-size: 14px;
+  font-weight: normal;
+  margin-bottom: 0;
+}
+.name i {
+  display: inline;
+}
+.zoom .name {
+  opacity: 1;
+}
+
+/*
+* Property styles in unhighlighted state.
+*/
+.property {
+  align-items: center;
+  background-color: transparent;
+  border-radius: 50%;
+  color: #263238;
+  display: flex;
+  font-size: 14px;
+  gap: 15px;
+  height: 30px;
+  justify-content: center;
+  padding: 4px;
+  position: relative;
+  position: relative;
+  transition: all 0.3s ease-out;
+  width: 30px;
+}
+.property:after {
+  display: none;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top: 9px solid #FFFFFF;
+  content: "";
+  height: 0;
+  left: 50%;
+  position: absolute;
+  top: 95%;
+  transform: translate(-50%, 0);
+  transition: all 0.3s ease-out;
+  width: 0;
+  z-index: 1;
+}
+.property .icon {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  color: #FFFFFF;
+}
+.property .icon svg {
+  height: 20px;
+  width: auto;
+}
+.property .details {
+  display: none;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  flex: 1;
+}
+.property .details .title {
+  padding: 1rem 0.5rem;
+  background-color: #FFFFFF;
+  border-right: 1px solid #095909;
+  border-radius: 8px 0 0 8px;
+}
+.property .features {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px;
+}
+.property .features > div {
+  align-items: center;
+  display: flex;
+  gap: 5px;
+  padding: 0;
+}
+.property.highlight {
+  height: auto;
+  width: auto;
+}
+.property.highlight .details {
+  display: flex;
+}
+.property.highlight .name {
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */
