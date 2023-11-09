@@ -53,7 +53,7 @@ footer {
 #legend > div > div > div {
   text-align: left;
 }
-#legend > div:nth-child(-n+2), #legend > div:nth-child(8) {
+#legend > div:nth-child(-n+3), #legend > div:nth-child(8) {
   color: #fff;
 }
 #legend > div:nth-child(n+9) {

@@ -92,7 +92,7 @@ const colors = {
     },
     Other: {
       name: "No Aggregation",
-      color: "#f2f9f4",
+      color: "#ffffff",
     },
     break: {
       name: "",
