@@ -114,7 +114,7 @@ const colors = {
       color: "#cecfd1",
     },
     muni: {
-      name: "Municipal Light PLant (No Class I requirements)",
+      name: "Municipal Light Plant (No Class I requirements)",
       color: "#d9c3a2",
     },
   };
@@ -155,8 +155,14 @@ async function createInfoWindow(event) {
   const locality = states[feature.placeId];
 
   
-  let status = locality.Status == 'Municipal Light Plant' ? 'N/A – Municipal Light Plant' : locality.Status != 'No Aggregation' ? 'Ongoing' : 'No Aggregation' ;
-  let renewable = locality.Renewable != '' ? '<br/>How much renewable energy by default? ' + 
+  let status = locality.Status == 'Municipal Light Plant' ? 'N/A – Municipal Light Plant' : 
+  // locality.Status != 'No Aggregation' ? locality.Status : 
+  locality.Status == 'Default > 5%' || 
+  locality.Status == 'Default < 5%' ||
+  locality.Status == 'Opt Up Class I' ||
+  locality.Status == 'No Class 1'
+  ? 'Ongoing' : locality.Status != 'No Aggregation' ? locality.Status : 'No Aggregation';
+  let renewable = locality.Renewable != '' ? '<br/>Additional renewable energy by default: ' + 
   locality.Renewable + '%' : '';
 
   // Update the infowindow.
