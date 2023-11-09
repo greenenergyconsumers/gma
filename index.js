@@ -53,9 +53,7 @@ async function initMap() {
   infoWindow = new InfoWindow({});
   // Apply style on load, to enable clicking.
  
- 
   featureLayer.style = applyStyle;
-
 
 const colors = { 
     lebel: {
@@ -147,42 +145,13 @@ const colors = {
 } //async function initMap()
 
 
-
-
-// function buildLegend(colors) {
-//    // Approved by DPU: #2c52a3, Waiting for DPU approval: #7bb0e1, Researching (in transition): #c6ddf3, 
-//   // Plan expired or suspended: #cecfd1, Municipal Light PLant (No Class I requirements): #a7a8ac
-//   const legend = document.getElementById("legend");
-  
-//   for (const [i, [key, value]]  of Object.entries(Object.entries(colors))) {
-
-//       const name = value.name;
-//       const color = value.color;
-//       const div = document.createElement("div");
-//       if (i > 9) {
-//         div.innerHTML = '<div><div style="background-color:' + color +'"></div><div>' + name;
-//       } else if (i == 0 ) {
-//         div.setAttribute("id", "label");
-//         div.innerHTML = '<span>'+ name +'</span>';
-//       } else if (i == 9) {
-//         div.setAttribute("class", "break");
-//       } else {
-//         div.innerHTML = '<div style="background-color:' + color +'">' + name;
-//       }
-//       legend.appendChild(div);
-//     }
-//   return legend;
-//   // console.log(infoWin);
-   
-// }
-
 // Helper function for the infowindow.
 async function createInfoWindow(event) {
   let feature = event.features[0];
 
   if (!feature.placeId) return;
   const locality = states[feature.placeId];
-// console.log(locality);
+  let renewable = locality.Renewable != '' ? locality.Renewable : '0';
   // Update the infowindow.
   const place = await feature.fetchPlace();
   let content =
@@ -191,8 +160,7 @@ async function createInfoWindow(event) {
     "</strong><br/> Status: " +
     locality.Status +
     "<br/> Renewable: " + 
-    locality.Renewable + 
-    "</span>";
+    renewable + "%</span>";
 
   updateInfoWindow(content, event.latLng);
 }
@@ -224,11 +192,12 @@ const styleNone = {
 
 // Apply styles using a feature style function.
 function applyStyle(/* FeatureStyleFunctionOptions */ params) {
-  
+
   const placeId = params.feature.placeId;
  
     if (pids.includes(placeId)) {
     const locality = states[placeId];
+
     let style = styles(locality);
     styleDefault['fillColor'] = style.fillColor;
     //@ts-ignore
