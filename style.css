@@ -9,7 +9,10 @@ body {
   padding: 0;
 }
 
-header {
+footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
   padding: 1vh;
   text-align: center;
 }
