@@ -120,22 +120,8 @@ const colors = {
     },
   };
 
-console.log(colors);
   
-  legend = buildLegend(colors);
-  
-//   const children = legend.childNodes;
-//  console.log(children[0]);
-  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(legend);
- 
-} //async function initMap()
-
-
-
-
-function buildLegend(colors) {
-   // Approved by DPU: #2c52a3, Waiting for DPU approval: #7bb0e1, Researching (in transition): #c6ddf3, 
-  // Plan expired or suspended: #cecfd1, Municipal Light PLant (No Class I requirements): #a7a8ac
+  //legend = buildLegend(colors);
   const legend = document.getElementById("legend");
   
   for (const [i, [key, value]]  of Object.entries(Object.entries(colors))) {
@@ -155,10 +141,40 @@ function buildLegend(colors) {
       }
       legend.appendChild(div);
     }
-  return legend;
-  // console.log(infoWin);
+  
+  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(legend);
+ 
+} //async function initMap()
+
+
+
+
+// function buildLegend(colors) {
+//    // Approved by DPU: #2c52a3, Waiting for DPU approval: #7bb0e1, Researching (in transition): #c6ddf3, 
+//   // Plan expired or suspended: #cecfd1, Municipal Light PLant (No Class I requirements): #a7a8ac
+//   const legend = document.getElementById("legend");
+  
+//   for (const [i, [key, value]]  of Object.entries(Object.entries(colors))) {
+
+//       const name = value.name;
+//       const color = value.color;
+//       const div = document.createElement("div");
+//       if (i > 9) {
+//         div.innerHTML = '<div><div style="background-color:' + color +'"></div><div>' + name;
+//       } else if (i == 0 ) {
+//         div.setAttribute("id", "label");
+//         div.innerHTML = '<span>'+ name +'</span>';
+//       } else if (i == 9) {
+//         div.setAttribute("class", "break");
+//       } else {
+//         div.innerHTML = '<div style="background-color:' + color +'">' + name;
+//       }
+//       legend.appendChild(div);
+//     }
+//   return legend;
+//   // console.log(infoWin);
    
-}
+// }
 
 // Helper function for the infowindow.
 async function createInfoWindow(event) {
