@@ -26,7 +26,7 @@ async function initMap() {
   const { Map, InfoWindow } = await google.maps.importLibrary("maps");
 
   map = new Map(document.getElementById("map"), {
-    center: { lat: 42.2625932, lng:-71.8022934 },
+    center: { lat: 42.0433661, lng:-71.9276033 }, //Dudley, MA 
     zoom: 8,
     // In the cloud console, configure your Map ID with a style that enables the
     // 'Administrative Area Level 2' Data Driven Styling type.
