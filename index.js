@@ -213,9 +213,7 @@ function applyStyle(/* FeatureStyleFunctionOptions */ params) {
  
     if (pids.includes(placeId)) {
     const locality = states[placeId];
-    // console.log(locality);
     let style = styles(locality);
-    //console.log(style.fillColor); // #color
     styleDefault['fillColor'] = style.fillColor;
     //@ts-ignore
     if (lastClickedFeatureIds.includes(placeId)) {
@@ -239,48 +237,60 @@ function updateInfoWindow(content, center) {
 
 function styles(obj) {
     let fillColor;
-switch (obj.Status) {
-    case "No Class 1":
-      fillColor = "#837359";
-      break;
-    case "Default > 5%":
-      if (obj.Renewable >= 30) {
-        fillColor = "#095909" //#0e7c3a
-      } else if (obj.Renewable >= 20) {
-        fillColor = "#2d8e54"; 
-      } else if (obj.Renewable >= 10) {
-        fillColor = "#b3e0b8"; 
-      } else {
-        fillColor = "#94d2ad";
-      }
-      break;
-    case "No Aggregation":
-      fillColor = "#837359"; 
-      break;
-    case "Opt Up Class I":
-      fillColor = "#d9c3a2";
-      break;
-    case "Approved by DPU":
-        fillColor = "#2c52a3";
-        break;
-    case "Waiting for DPU approval":
-      fillColor = "#7bb0e1";
-      break;
-    case "Researching (in transition)":
-      fillColor = "#c6ddf3";
-      break;
-    case "Plan expired or suspended":
-      fillColor = "#cecfd1";
-      break;
-    case "Municipal Light Plant":
-        fillColor = "#a7a8ac";
-        break;
-    default:
-      fillColor = "white";
-      break;
-    }  return {
-      fillColor,
-    };
+    switch (obj.Status) {
+        case "No Class 1":
+          fillColor = "#837359";
+          break;
+        case "Default > 5%":
+          if (obj.Renewable >= 30) {
+            fillColor = "#095909"; //#0e7c3a
+          } else if (obj.Renewable >= 20) {
+            fillColor = "#0e7c3a"; 
+          } else if (obj.Renewable >= 10) {
+            fillColor = "#7abc96"; 
+          } else {
+            fillColor = "#94d2ad";
+          }
+          break;
+          case  "Default < 5%":
+            fillColor = "#c9e7d9"; 
+          break;
+        case "No Aggregation":
+          fillColor = "#FFFFFF"; 
+          break;
+        case "Opt Up Class I":
+          fillColor = "#d9c3a2";
+          break;
+        case "Approved by DPU":
+            fillColor = "#2c52a3";
+            break;
+        case "Waiting for DPU approval":
+          fillColor = "#7bb0e1";
+          break;
+        case "Researching (in transition)":
+          fillColor = "#c6ddf3";
+          break;
+        case "Researching":
+          fillColor = "#c6ddf3";
+          break;
+        case "Plan expired or suspended":
+          fillColor = "#cecfd1";
+          break;
+        case "Denied":
+          fillColor = "#cecfd1";
+          break;
+          case "Suspended":
+          fillColor = "#cecfd1";
+          break;
+        case "Municipal Light Plant":
+            fillColor = "#a7a8ac";
+            break;
+        default:
+          fillColor = "white";
+          break;
+        }  return {
+          fillColor,
+        };
 }
 
 
