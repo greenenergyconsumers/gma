@@ -35,7 +35,7 @@ footer {
 }
 #legend > div {
   display: flex;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   flex: auto;
 }
 #legend > div.break {
@@ -48,7 +48,6 @@ footer {
   padding: 1rem 0.5rem;
   flex: 1 auto;
   text-align: center;
-  font-weight: bold;
 }
 #legend > div > div > div {
   text-align: left;
@@ -63,23 +62,23 @@ footer {
   background-color: #fff;
 }
 #legend > div:nth-child(n+8) > div {
-  padding: 10px;
+  padding: 5px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
 #legend > div:nth-child(n+8) > div > div:first-child {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
 }
 #legend > div:nth-child(n+8) > div > div:last-child {
-  padding-left: 10px;
+  padding-left: 8px;
   flex: 2;
 }
 #legend > div#label {
   color: #676767;
-  padding: 0 0 10px;
-  font-size: 1.1rem;
+  padding: 0 0 8px;
+  font-size: 0.9rem;
   flex: 1 1 100%;
   width: 100%;
   max-width: 100%;
@@ -88,7 +87,7 @@ footer {
 }
 #legend > div#label.separator {
   margin-top: 10px;
-  padding: 15px 0 0;
+  padding: 10px 0 0;
   border-top: 1px solid #b0b0b0;
 }
 @media screen and (min-width: 480px) {
@@ -99,8 +98,6 @@ footer {
 @media screen and (min-width: 600px) {
   #legend {
     padding: 10px;
-    max-width: 80%;
-    width: 80%;
   }
 }
 

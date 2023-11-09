@@ -41,7 +41,7 @@
     box-shadow: 5px 5px 5px #00000030;
     > div {
         display: flex;
-        font-size: .9rem;
+        font-size: .8rem;
         flex: auto;
        &.break {
         flex-basis: 100%;
@@ -53,7 +53,6 @@
             padding: 1rem .5rem;
             flex: 1 auto;
             text-align: center;
-            font-weight: bold;
             > div {
               text-align: left
             }
@@ -75,17 +74,17 @@
         &:nth-child(n+8) {
             background-color: #fff;
                 > div {
-                    padding: 10px;
+                    padding: 5px;
                     display: flex;
                     flex-wrap: wrap;
                     align-items: center;
                     > div {
                         &:first-child {
-                        width: 30px;
-                        height: 30px;
+                        width: 20px;
+                        height: 20px;
                         }
                         &:last-child {
-                            padding-left: 10px;
+                            padding-left: 8px;
                             flex: 2;
                         }
                     }
@@ -93,8 +92,8 @@
             }
             &#label {
                 color: #676767;
-                padding: 0 0 10px;
-                font-size: 1.1rem;
+                padding: 0 0 8px;
+                font-size: .9rem;
                 flex: 1 1 100%;
                 width: 100%;
                 max-width: 100%;
@@ -102,7 +101,7 @@
                 justify-content: space-between;
                 &.separator {
                   margin-top: 10px;
-                  padding: 15px 0 0;
+                  padding: 10px 0 0;
                   border-top: 1px solid #b0b0b0;
                 }
             }
@@ -112,8 +111,8 @@
      }
      @media screen and (min-width: 600px) {
           padding: 10px;
-          max-width: 80%;
-          width: 80%;
+          // max-width: 80%;
+          // width: 80%;
      }
     }
 .name {

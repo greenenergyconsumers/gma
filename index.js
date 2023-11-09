@@ -17,13 +17,6 @@ function handleMouseMove(/* MouseEvent */ e) {
   featureLayer.style = applyStyle;
 }
 
-function changeOut(status,renewable) {
-  return condition1 ? value1
-    : condition2 ? value2
-    : condition3 ? value3
-    : value4;
-}
-
 
 // Declare State locales via json
 const states = getJson()[0];
@@ -34,7 +27,7 @@ async function initMap() {
   const { Map, InfoWindow } = await google.maps.importLibrary("maps");
 
   map = new Map(document.getElementById("map"), {
-    center: { lat: 42.0433661, lng:-71.9276033 }, //Dudley, MA 
+    center: { lat: 41.40178, lng:-72.01465 }, //Dudley, MA 
     zoom: 8,
     // In the cloud console, configure your Map ID with a style that enables the
     // 'Administrative Area Level 2' Data Driven Styling type.
