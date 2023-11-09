@@ -17,6 +17,14 @@ function handleMouseMove(/* MouseEvent */ e) {
   featureLayer.style = applyStyle;
 }
 
+function changeOut(status,renewable) {
+  return condition1 ? value1
+    : condition2 ? value2
+    : condition3 ? value3
+    : value4;
+}
+
+
 // Declare State locales via json
 const states = getJson()[0];
 const pids = getJson()[1];
@@ -57,7 +65,7 @@ async function initMap() {
 
 const colors = { 
     lebel: {
-      name: "Most green (Class I renewable content)</span><span>Less green",
+      name: "Communities with aggregation programs, sorted by Class I renewable energy content.",
       color: "",
     },
     r30: {
@@ -81,20 +89,20 @@ const colors = {
       color: "#c9e7d9",
     },
     optUp: {
-      name: "Opt Up option",
-      color: "#d9c3a2",
+      name: "Optional Class I only (customer choice)",
+      color: "#6ec8c8", 
     },
     noClass: {
       name: "No Class I",
       color: "#837359",
     },
+    break: {
+      name: "Communities without active aggregation programs at this time.",
+      color: "",
+    },
     Other: {
       name: "No Aggregation",
       color: "#ffffff",
-    },
-    break: {
-      name: "",
-      color: "",
     },
     app_dpu: {
       name: "Approved by DPU",
@@ -114,7 +122,7 @@ const colors = {
     },
     muni: {
       name: "Municipal Light PLant (No Class I requirements)",
-      color: "#a7a8ac",
+      color: "#d9c3a2",
     },
   };
 
@@ -127,13 +135,14 @@ const colors = {
       const name = value.name;
       const color = value.color;
       const div = document.createElement("div");
-      if (i > 9) {
+      if (i > 8) {
         div.innerHTML = '<div><div style="background-color:' + color +'"></div><div>' + name;
-      } else if (i == 0 ) {
+      } else if (i == 0 || i == 8) {
         div.setAttribute("id", "label");
         div.innerHTML = '<span>'+ name +'</span>';
-      } else if (i == 9) {
-        div.setAttribute("class", "break");
+        if (i == 8) {
+          div.setAttribute("class", "separator");
+        }
       } else {
         div.innerHTML = '<div style="background-color:' + color +'">' + name;
       }
@@ -151,16 +160,20 @@ async function createInfoWindow(event) {
 
   if (!feature.placeId) return;
   const locality = states[feature.placeId];
-  let renewable = locality.Renewable != '' ? locality.Renewable : '0';
+
+  
+  let status = locality.Status == 'Municipal Light Plant' ? 'N/A – Municipal Light Plant' : locality.Status != 'No Aggregation' ? 'Ongoing' : 'No Aggregation' ;
+  let renewable = locality.Renewable != '' ? '<br/>How much renewable energy by default? ' + 
+  locality.Renewable + '%' : '';
+
   // Update the infowindow.
   const place = await feature.fetchPlace();
   let content =
     "<span><strong> " +
     place.displayName +
     "</strong><br/> Status: " +
-    locality.Status +
-    "<br/> Renewable: " + 
-    renewable + "%</span>";
+    status +
+    renewable + "</span>";
 
   updateInfoWindow(content, event.latLng);
 }
@@ -244,7 +257,7 @@ function styles(obj) {
           fillColor = "#FFFFFF"; 
           break;
         case "Opt Up Class I":
-          fillColor = "#d9c3a2";
+          fillColor = "#6ec8c8";
           break;
         case "Approved by DPU":
             fillColor = "#2c52a3";
@@ -268,7 +281,7 @@ function styles(obj) {
           fillColor = "#cecfd1";
           break;
         case "Municipal Light Plant":
-            fillColor = "#a7a8ac";
+            fillColor = "#d9c3a2";
             break;
         default:
           fillColor = "white";

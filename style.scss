@@ -63,7 +63,16 @@
                 color: #fff;
                 // font-size: 1rem;
             }
-        &:nth-child(n+9) {
+        &:nth-child(10) {
+          > div { 
+            > div {
+              &:first-child {
+                outline: 1px solid #666;
+              }
+            }
+          }
+        }
+        &:nth-child(n+8) {
             background-color: #fff;
                 > div {
                     padding: 10px;
@@ -83,19 +92,18 @@
                 }    
             }
             &#label {
-                // font-size: 1rem;
                 color: #676767;
                 padding: 0 0 10px;
-                font-weight: bold;
+                font-size: 1.1rem;
                 flex: 1 1 100%;
                 width: 100%;
                 max-width: 100%;
                 display: flex;
                 justify-content: space-between;
-                span {
-                  &:first-child {
-                    color: #095909;
-                  }
+                &.separator {
+                  margin-top: 10px;
+                  padding: 15px 0 0;
+                  border-top: 1px solid #b0b0b0;
                 }
             }
             @media screen and (min-width: 480px) {

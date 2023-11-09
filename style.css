@@ -56,35 +56,40 @@ footer {
 #legend > div:nth-child(-n+3), #legend > div:nth-child(8) {
   color: #fff;
 }
-#legend > div:nth-child(n+9) {
+#legend > div:nth-child(10) > div > div:first-child {
+  outline: 1px solid #666;
+}
+#legend > div:nth-child(n+8) {
   background-color: #fff;
 }
-#legend > div:nth-child(n+9) > div {
+#legend > div:nth-child(n+8) > div {
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
-#legend > div:nth-child(n+9) > div > div:first-child {
+#legend > div:nth-child(n+8) > div > div:first-child {
   width: 30px;
   height: 30px;
 }
-#legend > div:nth-child(n+9) > div > div:last-child {
+#legend > div:nth-child(n+8) > div > div:last-child {
   padding-left: 10px;
   flex: 2;
 }
 #legend > div#label {
   color: #676767;
   padding: 0 0 10px;
-  font-weight: bold;
+  font-size: 1.1rem;
   flex: 1 1 100%;
   width: 100%;
   max-width: 100%;
   display: flex;
   justify-content: space-between;
 }
-#legend > div#label span:first-child {
-  color: #095909;
+#legend > div#label.separator {
+  margin-top: 10px;
+  padding: 15px 0 0;
+  border-top: 1px solid #b0b0b0;
 }
 @media screen and (min-width: 480px) {
   #legend > div {
