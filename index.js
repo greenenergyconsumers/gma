@@ -58,39 +58,39 @@ async function initMap() {
 
 const colors = { 
     lebel: {
-      name: "Communities with aggregation programs, sorted by Class I renewable energy content.",
+      name: "Communities with aggregation programs, sorted by Class I renewable energy content:",
       color: "",
     },
     r30: {
-      name: "> 30%",
+      name: "> 30%*",
       color: "#095909",
     },
     r2029: {
-      name: "20 - 29%",
+      name: "20 - 29%*",
       color: "#0e7c3a",
     },
     r1019: {
-      name: "10 - 19%",
+      name: "10 - 19%*",
       color: "#7abc96",
     },
     r59: {
-      name: "5 - 9%",
+      name: "5 - 9%*",
       color: "#b3e0b8",
     },
     r14: {
-      name: "1 - 4%",
+      name: "1 - 4%*",
       color: "#c9e7d9",
     },
     optUp: {
       name: "Optional Class I only (customer choice)",
-      color: "#6ec8c8", 
+      color: "#d9c3a2", 
     },
     noClass: {
       name: "No Class I",
       color: "#837359",
     },
     break: {
-      name: "Communities without active aggregation programs at this time.",
+      name: "Communities without active aggregation programs at this time:",
       color: "",
     },
     Other: {
@@ -103,7 +103,7 @@ const colors = {
     },
     waiting: {
       name: "Waiting for DPU approval",
-      color: "#7bb0e1",
+      color: "#7bb0e1",   
     },
     research: {
       name: "Researching (in transition)",
@@ -115,7 +115,7 @@ const colors = {
     },
     muni: {
       name: "Municipal Light Plant (No Class I requirements)",
-      color: "#d9c3a2",
+      color: "#b49ec6",
     },
   };
 
@@ -189,7 +189,6 @@ const styleDefault = {
 // Style for the clicked polygon.
 const styleClicked = {
   ...styleDefault,
-  fillColor: "white",
   strokeWeight: 1,
   fillOpacity: 0.75,
 };
@@ -256,7 +255,7 @@ function styles(obj) {
           fillColor = "#FFFFFF"; 
           break;
         case "Opt Up Class I":
-          fillColor = "#6ec8c8";
+          fillColor = "#d9c3a2"; // color: "#d9c3a2",
           break;
         case "Approved by DPU":
             fillColor = "#2c52a3";
@@ -280,7 +279,7 @@ function styles(obj) {
           fillColor = "#cecfd1";
           break;
         case "Municipal Light Plant":
-            fillColor = "#d9c3a2";
+            fillColor = "#b49ec6";
             break;
         default:
           fillColor = "white";
